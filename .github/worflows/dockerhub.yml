@@ -1,0 +1,26 @@
+name: Subir imagen a docker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    name: Construir y subir imagen
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar del repositorio
+        uses: actions/checkout@v4
+      - name: Iniciar sesion en dockerhub
+        uses: docker/actions-login-actions@v4
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}}
+      - name: Construir y subir imagen
+        uses: docker/build-push-action@v6
+        with:
+          context:  .
+          push: true
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/mi-clase-recuperacion:lastest
