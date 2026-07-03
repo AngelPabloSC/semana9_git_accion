@@ -1,0 +1,9 @@
+name: mi primer workflow
+
+on: [push]
+
+jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar mensaje
+        run: echo "hola git desde actions"
